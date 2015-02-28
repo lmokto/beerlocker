@@ -2,6 +2,11 @@
   "name": "beerlocker",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.1.1"
+    "express": "^4.1.1",
+    "mocha": "^1.21.4",
+    "should": "^4.0.4",
+    "supertest": "^0.13.0",
+    "superagent": "^0.18.2",
+    "better-assert": "^1.0.1"
   }
 }
