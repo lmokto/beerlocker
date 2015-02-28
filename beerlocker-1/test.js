@@ -5,7 +5,7 @@ var request = require('supertest');
 var assert = require('assert');
 
 const url = 'localhost:3000';
-const interval = 1024;
+const interval = 1024
 
 var boom = function(){
 	throw new Error('BOOM');
