@@ -12,7 +12,7 @@ var oauth2Controller = require('./controllers/oauth2');
 var clientController = require('./controllers/client');
 
 if (process.env.OPENSHIFT_MONGODB_DB_HOST){
-  var connect_string = "mongodb://" process.env.OPENSHIFT_ADMIN ":" + proces.env.OPENSHIFT_PASS + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST +":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/beerlocker"
+  var connect_string = "mongodb://" + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" + process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST +":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/beerlocker"
 } else {
   var connect_string = 'mongodb://localhost:27017/beerlocker'
 }
