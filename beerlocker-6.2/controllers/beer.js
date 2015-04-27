@@ -1,6 +1,7 @@
 // Load required packages
 var Beer = require('../models/beer');
 
+
 // Create endpoint /api/beers for POST
 exports.postBeers = function(req, res) {
   // Create a new instance of the Beer model

@@ -12,7 +12,18 @@ var oauth2Controller = require('./controllers/oauth2');
 var clientController = require('./controllers/client');
 
 // Connect to the beerlocker MongoDB
-mongoose.connect('mongodb://localhost:27017/beerlocker');
+//    Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+//    Database Name:  beerlocker
+//    Password:       BTdQZxE8SXpS
+//    Username:       admin
+
+if (process.env.OPENSHIFT_MONGODB_DB_HOST){
+  var connect_string = "mongodb://admin:BTdQZxE8SXpS@" + process.env.OPENSHIFT_MONGODB_DB_HOST +":"+ process.env.OPENSHIFT_MONGODB_DB_PORT + "/beerlocker"
+} else {
+  var connect_string = 'mongodb://localhost:27017/beerlocker'
+}
+
+mongoose.connect(connect_string);
 
 // Create our Express application
 var app = express();
@@ -26,7 +37,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Use express session support since OAuth2orize requires it
-app.use(session({ 
+app.use(session({
   secret: 'Super Secret Session Key',
   saveUninitialized: true,
   resave: true
@@ -72,4 +83,12 @@ router.route('/api/oauth2/token')
 app.use(router);
 
 // Start the server
-app.listen(3000);
+if (process.env.OPENSHIFT_NODEJS_PORT){
+  var PORT = process.env.OPENSHIFT_NODEJS_PORT;
+  var IP = process.env.OPENSHIFT_NODEJS_IP
+} else {
+  var PORT = 3000;
+  var IP = "127.0.0.1"
+}
+
+app.listen(PORT, IP);

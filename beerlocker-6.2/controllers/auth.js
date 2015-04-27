@@ -49,10 +49,8 @@ passport.use(new DigestStrategy(
   }
 ));
 
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'pass'
-  },
+// curl -v --user lmokto:hacura --basic http://localhost:3000/api/users
+passport.use(new LocalStrategy({usernameField: 'email',passwordField: 'pass'},
   function(username, password, callback) {
     User.findOne({ username: username }, function (err, user) {
       if (err) { return callback(err); }
@@ -109,6 +107,6 @@ passport.use(new BearerStrategy(
   }
 ));
 
-exports.isAuthenticated = passport.authenticate(['local', 'bearer'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
 exports.isClientAuthenticated = passport.authenticate('client-basic', { session : false });
 exports.isBearerAuthenticated = passport.authenticate('bearer', { session: false });
