@@ -11,14 +11,8 @@ var authController = require('./controllers/auth');
 var oauth2Controller = require('./controllers/oauth2');
 var clientController = require('./controllers/client');
 
-// Connect to the beerlocker MongoDB
-//    Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
-//    Database Name:  beerlocker
-//    Password:       BTdQZxE8SXpS
-//    Username:       admin
-
 if (process.env.OPENSHIFT_MONGODB_DB_HOST){
-  var connect_string = "mongodb://admin:BTdQZxE8SXpS@" + process.env.OPENSHIFT_MONGODB_DB_HOST +":"+ process.env.OPENSHIFT_MONGODB_DB_PORT + "/beerlocker"
+  var connect_string = "mongodb://" process.env.OPENSHIFT_ADMIN ":" + proces.env.OPENSHIFT_PASS + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST +":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/beerlocker"
 } else {
   var connect_string = 'mongodb://localhost:27017/beerlocker'
 }

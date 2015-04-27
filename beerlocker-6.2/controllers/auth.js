@@ -49,7 +49,7 @@ passport.use(new DigestStrategy(
   }
 ));
 
-// curl -v --user lmokto:hacura --basic http://localhost:3000/api/users
+// curl -v --user lmokto:qweasd --basic http://localhost:3000/api/users
 passport.use(new LocalStrategy({usernameField: 'email',passwordField: 'pass'},
   function(username, password, callback) {
     User.findOne({ username: username }, function (err, user) {
